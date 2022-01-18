@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="container border-2 m-auto">
       <header className="flex justify-between items-center my-10">
-        <h1 className="font-semibold text-4xl">Budgets</h1>
+        <h1 className="font-semibold text-4xl mr-1">Budgets</h1>
         <div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white mr-2 py-2 px-3 rounded">
             Add Budget
@@ -23,7 +23,7 @@ function App() {
           alignItems: "flex-start",
         }}
       >
-        <BudgetCard></BudgetCard>
+        <BudgetCard name="Entertainment" amount={200} max={1000} gray={false}></BudgetCard>
       </div>
     </div>
   );
