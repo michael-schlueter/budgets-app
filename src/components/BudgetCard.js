@@ -1,5 +1,5 @@
 import React from "react";
-import { currencyFormatter } from "../utils";
+// import { currencyFormatter } from "../utils";
 
 export default function BudgetCard({ name, max, amount, gray }) {
 
@@ -19,7 +19,7 @@ export default function BudgetCard({ name, max, amount, gray }) {
       </div>
       <div className="bg-gray-400 h-3 rounded-lg mx-4 mt-4 overflow-hidden">
         {/* TODO: Progressbar dynamisch machen */}
-        <div className="bg-blue-700 w-3/4 h-full rounded-lg shadow-md"></div>
+        <div className={`w-3/4 ${getProgressBarColor(amount, max)} h-full rounded-lg shadow-md`}></div>
       </div>
       <div className="mr-4 ml-auto mt-6 mb-4">
         <button className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
@@ -33,4 +33,10 @@ export default function BudgetCard({ name, max, amount, gray }) {
   );
 }
 
+function getProgressBarColor(amount, max) {
+  const ratio = amount / max
+  if (ratio < .5) return "bg-blue-500"
+  if (ratio < .75) return "bg-yellow-400"
+  return "bg-red-500"
+}
 
