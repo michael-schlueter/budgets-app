@@ -1,12 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BudgetsProvider } from "./contexts/BudgetsContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BudgetsProvider>
+      <App />
+    </BudgetsProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
