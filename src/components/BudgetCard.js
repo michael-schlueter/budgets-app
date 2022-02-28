@@ -1,7 +1,7 @@
 import React from "react";
 // import { currencyFormatter } from "../utils";
 
-export default function BudgetCard({ name, max, amount, gray }) {
+export default function BudgetCard({ name, max, amount, gray, onAddExpenseClick }) {
 
   const classNames = ["border", "border-gray-200", "rounded", "flex", "flex-col"]
   if (amount > max) {
@@ -21,7 +21,7 @@ export default function BudgetCard({ name, max, amount, gray }) {
         <div className={`${getProgressBarColor(amount, max)} h-full rounded-lg shadow-md`} style={{width: `${(amount / max).toFixed(2) * 100}%`}}></div>
       </div>
       <div className="mr-4 ml-auto mt-6 mb-4">
-        <button className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
+        <button className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded" onClick={onAddExpenseClick}>
           Add Expense
         </button>
         <button className="bg-transparent hover:bg-gray-500 text-gray-700 hover:text-white py-2 px-2 border border-gray-500 hover:border-transparent rounded">

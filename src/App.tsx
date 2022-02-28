@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
+import AddExpenseModal from "./components/AddExpenseModal";
 import { useBudgets } from "./contexts/BudgetsContext";
+import { isExpressionStatement } from "typescript";
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
-  const { budgets } = useBudgets();
+  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
+  const { budgets, getBudgetExpenses } = useBudgets();
+
+// @ts-ignore
+const openAddExpenseModal = (budgetId) => {
+  setShowAddExpenseModal(true)
+  setAddExpenseModalBudgetId(budgetId)
+}
 
   return (
     <>
@@ -19,7 +29,7 @@ function App() {
             >
               Add Budget
             </button>
-            <button className="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
+            <button className="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded" onClick={openAddExpenseModal} >
               Add Expense
             </button>
           </div>
@@ -33,21 +43,32 @@ function App() {
           }}
         >
           {/* @ts-ignore */}
-          {budgets.map((budget) => (
+          {budgets.map(budget => {
+            // @ts-ignore
+            const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0)
+            return (
             // @ts-ignore
             <BudgetCard
               key={budget.id}
               name={budget.name}
-              amount={budget.amount}
+              amount={amount}
               max={budget.max}
+              // @ts-ignore
+              onAddExpenseClick={() => openAddExpenseModal(budget.id)}
             ></BudgetCard>
-          ))}
+          )})}
         </div>
       </div>
       {/* @ts-ignore */}
       <AddBudgetModal
         show={showAddBudgetModal}
         handleClose={() => setShowAddBudgetModal(false)}
+      />
+      {/* @ts-ignore */}
+            <AddExpenseModal
+        show={showAddExpenseModal}
+        defaultBudgetId={addExpenseModalBudgetId}
+        handleClose={() => setShowAddExpenseModal(false)}
       />
     </>
   );
