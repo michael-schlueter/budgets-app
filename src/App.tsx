@@ -4,6 +4,8 @@ import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal";
 import { useBudgets } from "./contexts/BudgetsContext";
 import { isExpressionStatement } from "typescript";
+import { UncategorizedBudgetCard } from "./components/UncategorizedBudgetCard";
+import { TotalBudgetCard } from "./components/TotalBudgetCard";
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
@@ -57,6 +59,8 @@ const openAddExpenseModal = (budgetId) => {
               onAddExpenseClick={() => openAddExpenseModal(budget.id)}
             ></BudgetCard>
           )})}
+          <UncategorizedBudgetCard onAddExpenseClick={openAddExpenseModal} />
+          <TotalBudgetCard />
         </div>
       </div>
       {/* @ts-ignore */}
