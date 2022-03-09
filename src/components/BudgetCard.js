@@ -8,6 +8,7 @@ export default function BudgetCard({
   gray,
   hideButtons,
   onAddExpenseClick,
+  onViewExpensesClick,
 }) {
   const classNames = [
     "border",
@@ -29,29 +30,37 @@ export default function BudgetCard({
           <h2 className="text-xl">{name}</h2>
         </div>
         <div className="text-xl">
-          {amount} $ {max && (<span className="text-sm text-gray-500">/ {max} $</span>)}
+          {amount} ${" "}
+          {max && <span className="text-sm text-gray-500">/ {max} $</span>}
         </div>
       </div>
       <div className="bg-gray-400 h-3 rounded-lg mx-4 mt-4 overflow-hidden">
-        {max && (<div
-          className={`${getProgressBarColor(
-            amount,
-            max
-          )} h-full rounded-lg shadow-md`}
-          style={{ width: `${(amount / max).toFixed(2) * 100}%` }}
-        ></div>)}
+        {max && (
+          <div
+            className={`${getProgressBarColor(
+              amount,
+              max
+            )} h-full rounded-lg shadow-md`}
+            style={{ width: `${(amount / max).toFixed(2) * 100}%` }}
+          ></div>
+        )}
       </div>
-      {!hideButtons && <div className="mr-4 ml-auto mt-6 mb-4">
-        <button
-          className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
-          onClick={onAddExpenseClick}
-        >
-          Add Expense
-        </button>
-        <button className="bg-transparent hover:bg-gray-500 text-gray-700 hover:text-white py-2 px-2 border border-gray-500 hover:border-transparent rounded">
-          View Expenses
-        </button>
-      </div>}
+      {!hideButtons && (
+        <div className="mr-4 ml-auto mt-6 mb-4">
+          <button
+            className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
+            onClick={onAddExpenseClick}
+          >
+            Add Expense
+          </button>
+          <button
+            className="bg-transparent hover:bg-gray-500 text-gray-700 hover:text-white py-2 px-2 border border-gray-500 hover:border-transparent rounded"
+            onClick={onViewExpensesClick}
+          >
+            View Expenses
+          </button>
+        </div>
+      )}
     </div>
   );
 }
