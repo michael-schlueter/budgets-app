@@ -25,7 +25,7 @@ export default function BudgetCard({
 
   return (
     <div className={classNames.join(" ")}>
-      <div className="mt-4 mx-4 title flex justify-between">
+      <div className="mt-4 mb-4 mx-4 title flex justify-between">
         <div>
           <h2 className="text-xl">{name}</h2>
         </div>
@@ -34,8 +34,8 @@ export default function BudgetCard({
           {max && <span className="text-sm text-gray-500">/ {max} $</span>}
         </div>
       </div>
-      <div className="bg-gray-400 h-3 rounded-lg mx-4 mt-4 overflow-hidden mb-6">
         {max && (
+      <div className="bg-gray-400 h-3 rounded-lg mx-4 overflow-hidden mb-6">
           <div
             className={`${getProgressBarColor(
               amount,
@@ -43,8 +43,8 @@ export default function BudgetCard({
             )} h-full rounded-lg shadow-md`}
             style={{ width: `${(amount / max).toFixed(2) * 100}%` }}
           ></div>
-        )}
       </div>
+        )}
       {!hideButtons && (
         <div className="mr-4 ml-auto mb-4">
           <button
