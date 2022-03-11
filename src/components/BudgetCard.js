@@ -16,6 +16,7 @@ export default function BudgetCard({
     "rounded",
     "flex",
     "flex-col",
+    "mb-4",
   ];
   if (amount > max) {
     classNames.push("bg-red-500 bg-opacity-20");
