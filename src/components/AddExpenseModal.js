@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../contexts/BudgetsContext";
 
 export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
@@ -24,23 +24,18 @@ const handleSubmit = (e) => {
     <div>
     {show ? (
       <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto my-6 mx-auto max-w-sm">
+      <div className="justify-center items-start flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className="relative w-full my-6 mx-auto max-w-md">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-200 rounded-t">
+            <div className="flex items-start justify-between mb-5 p-5 border-b border-solid border-gray-200 rounded-t">
               <h3 className="text-3xl font-semibold">New Expense</h3>
-              <button className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
-              </button>
             </div>
             <div className="relative p-3 flex-auto">
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col">
                   <label
                     htmlFor="description"
-                    className="text-xs font-semibold leading-3 text-gray-800 dark:text-gray-100"
+                    className="text-base font-normal leading-3 text-gray-800 dark:text-gray-100 mb-2"
                   >
                     Description
                   </label>
@@ -48,14 +43,14 @@ const handleSubmit = (e) => {
                     id="description"
                     type="text"
                     ref={descriptionRef}
-                    className="text-xs font-medium leading-3 text-gray-500 dark:text-gray-400 resize-none bg-gray-50 dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none px-4 py-3 mt-2"
+                    className="text-base font-normal leading-3 text-gray-800 dark:text-gray-400 resize-none bg-gray-50 dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none focus:border focus:border-blue-500 px-4 py-3 mt-2 mb-5"
                     required
                   />
                 </div>
                 <div className="flex flex-col">
                   <label
                     htmlFor="amount"
-                    className="text-xs font-semibold leading-3 text-gray-800 dark:text-gray-100"
+                    className="text-base font-normal leading-3 text-gray-800 dark:text-gray-100 mb-2"
                   >
                     Amount
                   </label>
@@ -65,33 +60,33 @@ const handleSubmit = (e) => {
                     ref={amountRef}
                     min="0"
                     step=".01"
-                    className="text-xs font-medium leading-3 text-gray-500 dark:text-gray-400 resize-none bg-gray-50 dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none px-4 py-3 mt-2"
+                    className="text-base font-normal leading-3 text-gray-800 dark:text-gray-400 resize-none bg-gray-50 dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none focus:border focus:border-blue-500 px-4 py-3 mt-2 mb-5"
                     required
                   />
                 </div>
                 <div className="flex flex-col">
                   <label
                     htmlFor="budget"
-                    className="text-xs font-semibold leading-3 text-gray-800 dark:text-gray-100"
+                    className="text-base font-normal leading-3 text-gray-800 dark:text-gray-100 mb-2"
                   >
                     Budget
                   </label>
-                    <select ref={budgetIdRef} defaultValue={defaultBudgetId}>
+                    <select className="text-base font-normal leading-3 text-gray-800 dark:text-gray-400 bg-gray-50 dark: dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 px-4 py-3 mt-2" ref={budgetIdRef} defaultValue={defaultBudgetId}>
                         <option id={UNCATEGORIZED_BUDGET_ID}>Uncategorized</option>
                         {budgets.map(budget => (
                             <option key={budget.id} value={budget.id}>{budget.name}</option>
                         ))}
                     </select>
                 </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white mr-2 py-2 px-3 rounded">
+
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white mt-7 py-2 px-3 rounded float-right">
                     Add
                   </button>
-                </div>
+
               </form>
             </div>
             <div
-              className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 transition duration-150 ease-in-out"
+              className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
               onClick={handleClose}
             >
               <svg
@@ -116,7 +111,7 @@ const handleSubmit = (e) => {
         </div>
       </div>
 
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
     </>
     ) : ""}
     </div>    
