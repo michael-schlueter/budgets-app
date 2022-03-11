@@ -2,6 +2,7 @@ import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
 } from "../contexts/BudgetsContext";
+import { currencyFormatter } from "../utils";
 
 export default function ViewExpensesModal({ budgetId, handleClose }) {
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
@@ -43,7 +44,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                       <p>{expense.description}</p>
                       </div>
                       <div className="flex items-center">
-                      <p className="text-xl mr-2">{expense.amount}</p>
+                      <p className="text-xl mr-2">{currencyFormatter.format(expense.amount)}</p>
                       <div className="flex justify-center items-center">
                       <button className="p-2 text-xl bg-transparent text-red-700 rounded" onClick={() => deleteExpense(expense)}>&times;</button>
                       </div>
