@@ -34,7 +34,7 @@ export default function BudgetCard({
           {max && <span className="text-sm text-gray-500">/ {max} $</span>}
         </div>
       </div>
-      <div className="bg-gray-400 h-3 rounded-lg mx-4 mt-4 overflow-hidden">
+      <div className="bg-gray-400 h-3 rounded-lg mx-4 mt-4 overflow-hidden mb-6">
         {max && (
           <div
             className={`${getProgressBarColor(
@@ -46,7 +46,7 @@ export default function BudgetCard({
         )}
       </div>
       {!hideButtons && (
-        <div className="mr-4 ml-auto mt-6 mb-4">
+        <div className="mr-4 ml-auto mb-4">
           <button
             className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
             onClick={onAddExpenseClick}
