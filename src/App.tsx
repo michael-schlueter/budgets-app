@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <div className="container border-2 m-auto">
+      <div className="container m-auto">
         <header className="flex justify-between items-center my-10">
           <h1 className="font-semibold text-4xl mr-1">Budgets</h1>
           <div>
