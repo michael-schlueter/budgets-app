@@ -8,7 +8,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
     useBudgets();
 
-    const expenses = getBudgetExpenses(budgetId);
+  const expenses = getBudgetExpenses(budgetId);
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
@@ -38,18 +38,25 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                   )}
                 </div>
                 <div className="border text-2xl relative p-3">
-                  {expenses.map(expense => (
+                  {expenses.map((expense) => (
                     <div className="flex justify-between items-center py-3">
                       <div>
-                      <p>{expense.description}</p>
+                        <p>{expense.description}</p>
                       </div>
                       <div className="flex items-center">
-                      <p className="text-xl mr-2">{currencyFormatter.format(expense.amount)}</p>
-                      <div className="flex justify-center items-center">
-                      <button className="p-2 text-xl bg-transparent text-red-700 rounded" onClick={() => deleteExpense(expense)}>&times;</button>
+                        <p className="text-xl mr-2">
+                          {currencyFormatter.format(expense.amount)}
+                        </p>
+                        <div className="flex justify-center items-center">
+                          <button
+                            className="p-2 text-xl bg-transparent text-red-700 rounded"
+                            onClick={() => deleteExpense(expense)}
+                          >
+                            &times;
+                          </button>
+                        </div>
                       </div>
-                      </div>
-                      </div>
+                    </div>
                   ))}
                 </div>
                 <div

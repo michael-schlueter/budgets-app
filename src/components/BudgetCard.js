@@ -1,6 +1,3 @@
-import React from "react";
-// import { currencyFormatter } from "../utils";
-
 export default function BudgetCard({
   name,
   max,
@@ -35,8 +32,8 @@ export default function BudgetCard({
           {max && <span className="text-sm text-gray-500">/ {max} $</span>}
         </div>
       </div>
-        {max && (
-      <div className="bg-gray-400 h-3 rounded-lg mx-4 overflow-hidden mb-6">
+      {max && (
+        <div className="bg-gray-400 h-3 rounded-lg mx-4 overflow-hidden mb-6">
           <div
             className={`${getProgressBarColor(
               amount,
@@ -44,8 +41,8 @@ export default function BudgetCard({
             )} h-full rounded-lg shadow-md`}
             style={{ width: `${(amount / max).toFixed(2) * 100}%` }}
           ></div>
-      </div>
-        )}
+        </div>
+      )}
       {!hideButtons && (
         <div className="mr-4 ml-auto mb-4">
           <button
