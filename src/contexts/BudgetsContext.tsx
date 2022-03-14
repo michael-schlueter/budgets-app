@@ -2,20 +2,20 @@ import React, { useContext } from "react";
 import { v4 as uuidV4 } from "uuid";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-interface Budgets {
+export interface Budgets {
   id: string;
   name: string;
   max: number;
 }
 
-interface Expenses {
+export interface Expenses {
   id: string;
   budgetId: string;
   description: string;
   amount: number;
 }
 
-interface IBudgetsContext {
+export interface IBudgetsContext {
   budgets: Budgets[];
   expenses: Expenses[];
   addBudget: Function;
@@ -29,7 +29,6 @@ const BudgetsContext = React.createContext<IBudgetsContext | {}>({});
 export const UNCATEGORIZED_BUDGET_ID = "Uncategorized";
 
 export function useBudgets() {
-  console.log(useContext(BudgetsContext));
   return useContext(BudgetsContext);
 }
 

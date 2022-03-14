@@ -1,17 +1,24 @@
 import React, { useRef } from "react";
 import { useBudgets } from "../contexts/BudgetsContext";
 
-export default function AddBudgetModal({ show, handleClose }) {
-  const nameRef = useRef();
-  const maxSpendingRef = useRef();
+interface Props {
+  show?: boolean;
+  handleClose: React.MouseEventHandler<HTMLDivElement>;
+}
+
+export default function AddBudgetModal({ show, handleClose }:Props) {
+  const nameRef = useRef<HTMLInputElement>(null!);
+  const maxSpendingRef = useRef<HTMLInputElement>(null!);
+  // @ts-ignore
   const { addBudget } = useBudgets();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addBudget({
       name: nameRef.current.value,
       max: parseFloat(maxSpendingRef.current.value), // converting string into a float
     });
+    // @ts-ignore
     handleClose();
   };
 

@@ -2,21 +2,30 @@ import { useRef } from "react";
 import {
   useBudgets,
   UNCATEGORIZED_BUDGET_ID,
+  Budgets,
 } from "../contexts/BudgetsContext";
 
-export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
-  const descriptionRef = useRef();
-  const amountRef = useRef();
-  const budgetIdRef = useRef();
+interface Props {
+  show: boolean;
+  handleClose: React.MouseEventHandler<HTMLDivElement>;
+  defaultBudgetId: string;
+}
+
+export default function AddBudgetModal({ show, handleClose, defaultBudgetId }:Props) {
+  const descriptionRef = useRef<HTMLInputElement>(null!);
+  const amountRef = useRef<HTMLInputElement>(null!);
+  const budgetIdRef = useRef<HTMLSelectElement>(null!);
+  // @ts-ignore
   const { addExpense, budgets } = useBudgets();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value), // converting string into a float
       budgetId: budgetIdRef.current.value,
     });
+    // @ts-ignore
     handleClose();
   };
 
@@ -79,7 +88,7 @@ export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
                         <option id={UNCATEGORIZED_BUDGET_ID}>
                           Uncategorized
                         </option>
-                        {budgets.map((budget) => (
+                        {budgets.map((budget:Budgets) => (
                           <option key={budget.id} value={budget.id}>
                             {budget.name}
                           </option>
