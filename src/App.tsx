@@ -10,7 +10,7 @@ import ViewExpensesModal from "./components/ViewExpensesModal";
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState<string | null>();
+  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState<string | null>(null);
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState<React.MouseEvent | string | undefined>();
   // @ts-ignore
   const { budgets, getBudgetExpenses } = useBudgets();
@@ -86,6 +86,7 @@ function App() {
         handleClose={() => setShowAddExpenseModal(false)}
       />
       <ViewExpensesModal
+      // @ts-ignore
         budgetId={viewExpensesModalBudgetId}
         handleClose={() => setViewExpensesModalBudgetId(null)}
       />

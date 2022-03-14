@@ -7,7 +7,8 @@ import {
 
 interface Props {
   show: boolean;
-  handleClose: React.MouseEventHandler<HTMLDivElement>;
+  // handleClose: React.MouseEventHandler<HTMLDivElement>;
+  handleClose: () => void;
   defaultBudgetId: string;
 }
 

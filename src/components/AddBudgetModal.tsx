@@ -3,7 +3,7 @@ import { useBudgets } from "../contexts/BudgetsContext";
 
 interface Props {
   show?: boolean;
-  handleClose: React.MouseEventHandler<HTMLDivElement>;
+  handleClose: () => void;
 }
 
 export default function AddBudgetModal({ show, handleClose }:Props) {
@@ -18,7 +18,6 @@ export default function AddBudgetModal({ show, handleClose }:Props) {
       name: nameRef.current.value,
       max: parseFloat(maxSpendingRef.current.value), // converting string into a float
     });
-    // @ts-ignore
     handleClose();
   };
 
