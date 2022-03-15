@@ -7,12 +7,11 @@ import {
 
 interface Props {
   show: boolean;
-  // handleClose: React.MouseEventHandler<HTMLDivElement>;
-  handleClose: () => void;
+  handleExpenseClose: () => void;
   defaultBudgetId: string;
 }
 
-export default function AddBudgetModal({ show, handleClose, defaultBudgetId }:Props) {
+export default function AddBudgetModal({ show, handleExpenseClose, defaultBudgetId }:Props) {
   const descriptionRef = useRef<HTMLInputElement>(null!);
   const amountRef = useRef<HTMLInputElement>(null!);
   const budgetIdRef = useRef<HTMLSelectElement>(null!);
@@ -26,8 +25,7 @@ export default function AddBudgetModal({ show, handleClose, defaultBudgetId }:Pr
       amount: parseFloat(amountRef.current.value), // converting string into a float
       budgetId: budgetIdRef.current.value,
     });
-    // @ts-ignore
-    handleClose();
+    handleExpenseClose();
   };
 
   return (
@@ -107,7 +105,7 @@ export default function AddBudgetModal({ show, handleClose, defaultBudgetId }:Pr
                 </div>
                 <div
                   className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
-                  onClick={handleClose}
+                  onClick={handleExpenseClose}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

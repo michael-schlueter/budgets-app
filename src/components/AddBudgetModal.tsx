@@ -3,10 +3,10 @@ import { useBudgets } from "../contexts/BudgetsContext";
 
 interface Props {
   show?: boolean;
-  handleClose: () => void;
+  handleBudgetClose: () => void;
 }
 
-export default function AddBudgetModal({ show, handleClose }:Props) {
+export default function AddBudgetModal({ show, handleBudgetClose }:Props) {
   const nameRef = useRef<HTMLInputElement>(null!);
   const maxSpendingRef = useRef<HTMLInputElement>(null!);
   // @ts-ignore
@@ -18,7 +18,7 @@ export default function AddBudgetModal({ show, handleClose }:Props) {
       name: nameRef.current.value,
       max: parseFloat(maxSpendingRef.current.value), // converting string into a float
     });
-    handleClose();
+    handleBudgetClose();
   };
 
   return (
@@ -75,7 +75,7 @@ export default function AddBudgetModal({ show, handleClose }:Props) {
                 </div>
                 <div
                   className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
-                  onClick={handleClose}
+                  onClick={handleBudgetClose}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
