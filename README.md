@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Budgets App
+> This budgets app enables the user to get an overview of her / his expenses and budgets by adding / deleting budgets / expenses and giving visual feedback of how much of the budget is available.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## General Information
+- I undertook this project in order to familiarize myself more with using React in combination with TypeScript and TailwindCSS (e.g., creating Modals)
+- In particular I wanted to learn how to use TypeScript in combination with React hooks like useState, useRef and useContext
+- The challenge was to take a full functioning JavaScript app and migrate it to TS
+- I also intended to get more comfortable working with git branches and the process of making pull requests and merging branches in repositories
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies Used
+- React 17.0.2
+- TypeScript 4.5.4
+- TailwindCSS 3.0.15
+- UUID 8.3.2
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Features
+- Displaying an overview of different budgets
+- Each budget displays an overview of expenses
+- Adding & Removing budgets and expenses
+- Re-categorize / un-categorize expenses from budgets
+- Visual feedback for budget-utilization
+- Using local storage for data to persist
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
+![Example screenshot](https://i.ibb.co/9tXJcLp/budgets-app.jpg)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Demo
+Live demo [_here_](https://objective-ride-63b3d6.netlify.app/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Setup
+The dependencies which are necessary to run this app can be found in the package.json file.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repo
+2. Navigate to the project folder in the terminal and install the necessary NPM dependencies
+```
+npm install
+```
+3. Run the app typing
+```
+npm start
+```
+in your terminal and visit localhost:3000 in your browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Learnings
+- Creating a currency formatter
+- Creating a dynamic progress bar with TailwindCSS
+- Creating custom hooks (useLocalStorage, useBudgets) for local storage / context API
+- Creating Modals with TailwindCSS
+- Typing of React Hooks / props / event-handler
+- Cloning a repositoring, creating branches, making pull requests, merging branches
+- Identifying and fixing various bugs in relation to TS
+
+
+
+## Project Status
+The project is basically finished. I plan to revisit it in the future to tweak / fix the typing after I gained more experience in it with other projects.
+
+
+
+## Acknowledgements
+- This project was based in parts on [this tutorial](https://www.youtube.com/watch?v=yz8x71BiGXg) from [WebDevSimplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
+
+
+
