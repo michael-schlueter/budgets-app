@@ -11,14 +11,18 @@ interface Props {
   defaultBudgetId: string;
 }
 
-export default function AddBudgetModal({ show, handleExpenseClose, defaultBudgetId }:Props) {
+export default function AddBudgetModal({
+  show,
+  handleExpenseClose,
+  defaultBudgetId,
+}: Props) {
   const descriptionRef = useRef<HTMLInputElement>(null!);
   const amountRef = useRef<HTMLInputElement>(null!);
   const budgetIdRef = useRef<HTMLSelectElement>(null!);
   // @ts-ignore
   const { addExpense, budgets } = useBudgets();
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addExpense({
       description: descriptionRef.current.value,
@@ -87,7 +91,7 @@ export default function AddBudgetModal({ show, handleExpenseClose, defaultBudget
                         <option id={UNCATEGORIZED_BUDGET_ID}>
                           Uncategorized
                         </option>
-                        {budgets.map((budget:Budgets) => (
+                        {budgets.map((budget: Budgets) => (
                           <option key={budget.id} value={budget.id}>
                             {budget.name}
                           </option>

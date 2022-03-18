@@ -22,6 +22,7 @@ export interface IBudgetsContext {
   addExpense: Function;
   deleteBudget: Function;
   deleteExpense: Function;
+  getBudgetExpenses: Function;
 }
 
 const BudgetsContext = React.createContext<IBudgetsContext | {}>({});
@@ -37,18 +38,20 @@ export const BudgetsProvider: React.FC = ({ children }) => {
   const [expenses, setExpenses] = useLocalStorage("expenses", []);
 
   // return expenses only for the relevant budget
-  function getBudgetExpenses(budgetId:string) {
-    return expenses.filter((expense:Expenses) => expense.budgetId === budgetId);
+  function getBudgetExpenses(budgetId: string) {
+    return expenses.filter(
+      (expense: Expenses) => expense.budgetId === budgetId
+    );
   }
 
-  function addExpense({ budgetId, amount, description }:Expenses) {
-    setExpenses((prevExpenses:Expenses[]) => {
+  function addExpense({ budgetId, amount, description }: Expenses) {
+    setExpenses((prevExpenses: Expenses[]) => {
       return [...prevExpenses, { id: uuidV4(), description, amount, budgetId }];
     });
   }
 
-  function addBudget({ name, max }:Budgets) {
-    setBudgets((prevBudgets:Budgets[]) => {
+  function addBudget({ name, max }: Budgets) {
+    setBudgets((prevBudgets: Budgets[]) => {
       // don't add the budget if there already exists a budget with the same name
       if (prevBudgets.find((budget) => budget.name === name)) {
         return prevBudgets;
@@ -57,21 +60,21 @@ export const BudgetsProvider: React.FC = ({ children }) => {
     });
   }
 
-  function deleteBudget({ id }:Budgets) {
+  function deleteBudget({ id }: Budgets) {
     // when removing a budget, transfer its expenses to uncategorized
-    setExpenses((prevExpenses:Expenses[]) => {
+    setExpenses((prevExpenses: Expenses[]) => {
       return prevExpenses.map((expense) => {
         if (expense.budgetId !== id) return expense;
         return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID };
       });
     });
-    setBudgets((prevBudgets:Budgets[]) => {
+    setBudgets((prevBudgets: Budgets[]) => {
       return prevBudgets.filter((budget) => budget.id !== id);
     });
   }
 
-  function deleteExpense({ id }:Expenses) {
-    setExpenses((prevExpenses:Expenses[]) => {
+  function deleteExpense({ id }: Expenses) {
+    setExpenses((prevExpenses: Expenses[]) => {
       return prevExpenses.filter((expense) => expense.id !== id);
     });
   }

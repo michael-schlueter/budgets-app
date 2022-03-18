@@ -16,7 +16,7 @@ export default function BudgetCard({
   hideButtons,
   onAddExpenseClick,
   onViewExpensesClick,
-}:Props) {
+}: Props) {
   const classNames = [
     "border",
     "border-gray-200",
@@ -39,7 +39,9 @@ export default function BudgetCard({
         </div>
         <div className="text-xl">
           {amount} ${" "}
-          {max !== 0 && <span className="text-sm text-gray-500">/ {max} $</span>}
+          {max !== 0 && (
+            <span className="text-sm text-gray-500">/ {max} $</span>
+          )}
         </div>
       </div>
       {max !== 0 && (

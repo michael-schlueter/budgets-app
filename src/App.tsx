@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal";
-import { UNCATEGORIZED_BUDGET_ID, useBudgets, Budgets, Expenses } from "./contexts/BudgetsContext";
+import {
+  UNCATEGORIZED_BUDGET_ID,
+  useBudgets,
+  Budgets,
+  Expenses,
+} from "./contexts/BudgetsContext";
 import { UncategorizedBudgetCard } from "./components/UncategorizedBudgetCard";
 import { TotalBudgetCard } from "./components/TotalBudgetCard";
 import ViewExpensesModal from "./components/ViewExpensesModal";
@@ -10,12 +15,17 @@ import ViewExpensesModal from "./components/ViewExpensesModal";
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState<string | null>();
-  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState<React.MouseEvent | string | undefined>();
+  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState<
+    string | null
+  >();
+  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState<
+    React.MouseEvent | string | undefined
+  >();
+
   // @ts-ignore
   const { budgets, getBudgetExpenses } = useBudgets();
 
-  const openAddExpenseModal = (budgetId:React.MouseEvent | string) => {
+  const openAddExpenseModal = (budgetId: React.MouseEvent | string) => {
     setShowAddExpenseModal(true);
     setAddExpenseModalBudgetId(budgetId);
   };
@@ -48,9 +58,9 @@ function App() {
             alignItems: "flex-start",
           }}
         >
-          {budgets.map((budget:Budgets) => {
+          {budgets.map((budget: Budgets) => {
             const amount = getBudgetExpenses(budget.id).reduce(
-              (total:number, expense:Expenses) => total + expense.amount,
+              (total: number, expense: Expenses) => total + expense.amount,
               0
             );
             return (
@@ -86,7 +96,7 @@ function App() {
         handleExpenseClose={() => setShowAddExpenseModal(false)}
       />
       <ViewExpensesModal
-      // @ts-ignore
+        // @ts-ignore
         budgetId={viewExpensesModalBudgetId}
         handleExpensesClose={() => setViewExpensesModalBudgetId(null)}
       />
