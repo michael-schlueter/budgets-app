@@ -2,22 +2,34 @@ import { useRef } from "react";
 import {
   useBudgets,
   UNCATEGORIZED_BUDGET_ID,
+  Budgets,
 } from "../contexts/BudgetsContext";
 
-export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
-  const descriptionRef = useRef();
-  const amountRef = useRef();
-  const budgetIdRef = useRef();
+interface Props {
+  show: boolean;
+  handleExpenseClose: () => void;
+  defaultBudgetId: string;
+}
+
+export default function AddBudgetModal({
+  show,
+  handleExpenseClose,
+  defaultBudgetId,
+}: Props) {
+  const descriptionRef = useRef<HTMLInputElement>(null!);
+  const amountRef = useRef<HTMLInputElement>(null!);
+  const budgetIdRef = useRef<HTMLSelectElement>(null!);
+  // @ts-ignore
   const { addExpense, budgets } = useBudgets();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value), // converting string into a float
       budgetId: budgetIdRef.current.value,
     });
-    handleClose();
+    handleExpenseClose();
   };
 
   return (
@@ -79,7 +91,7 @@ export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
                         <option id={UNCATEGORIZED_BUDGET_ID}>
                           Uncategorized
                         </option>
-                        {budgets.map((budget) => (
+                        {budgets.map((budget: Budgets) => (
                           <option key={budget.id} value={budget.id}>
                             {budget.name}
                           </option>
@@ -97,7 +109,7 @@ export default function AddBudgetModal({ show, handleClose, defaultBudgetId }) {
                 </div>
                 <div
                   className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
-                  onClick={handleClose}
+                  onClick={handleExpenseClose}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal";
-import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "./contexts/BudgetsContext";
+import {
+  UNCATEGORIZED_BUDGET_ID,
+  useBudgets,
+  Budgets,
+  Expenses,
+} from "./contexts/BudgetsContext";
 import { UncategorizedBudgetCard } from "./components/UncategorizedBudgetCard";
 import { TotalBudgetCard } from "./components/TotalBudgetCard";
 import ViewExpensesModal from "./components/ViewExpensesModal";
@@ -10,12 +15,17 @@ import ViewExpensesModal from "./components/ViewExpensesModal";
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
-  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
-  const { budgets, getBudgetExpenses } = useBudgets();
+  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState<
+    string | null
+  >();
+  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState<
+    React.MouseEvent | string | undefined
+  >();
 
   // @ts-ignore
-  const openAddExpenseModal = (budgetId) => {
+  const { budgets, getBudgetExpenses } = useBudgets();
+
+  const openAddExpenseModal = (budgetId: React.MouseEvent | string) => {
     setShowAddExpenseModal(true);
     setAddExpenseModalBudgetId(budgetId);
   };
@@ -48,57 +58,47 @@ function App() {
             alignItems: "flex-start",
           }}
         >
-          {/* @ts-ignore */}
-          {budgets.map((budget) => {
-            // @ts-ignore
+          {budgets.map((budget: Budgets) => {
             const amount = getBudgetExpenses(budget.id).reduce(
-              // @ts-ignore
-              (total, expense) => total + expense.amount,
+              (total: number, expense: Expenses) => total + expense.amount,
               0
             );
             return (
-              // @ts-ignore
               <BudgetCard
                 key={budget.id}
                 name={budget.name}
                 amount={amount}
                 max={budget.max}
-                // @ts-ignore
                 onAddExpenseClick={() => openAddExpenseModal(budget.id)}
-                // @ts-ignore
                 onViewExpensesClick={() =>
                   setViewExpensesModalBudgetId(budget.id)
                 }
               ></BudgetCard>
             );
           })}
-          {/* @ts-ignore */}
           <UncategorizedBudgetCard
             onAddExpenseClick={openAddExpenseModal}
             onViewExpensesClick={() =>
-              // @ts-ignore
               setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID)
             }
           />
           <TotalBudgetCard />
         </div>
       </div>
-      {/* @ts-ignore */}
       <AddBudgetModal
         show={showAddBudgetModal}
-        handleClose={() => setShowAddBudgetModal(false)}
+        handleBudgetClose={() => setShowAddBudgetModal(false)}
       />
-      {/* @ts-ignore */}
       <AddExpenseModal
         show={showAddExpenseModal}
-        defaultBudgetId={addExpenseModalBudgetId}
-        handleClose={() => setShowAddExpenseModal(false)}
-      />
-      {/* @ts-ignore */}
-      <ViewExpensesModal
-        budgetId={viewExpensesModalBudgetId}
         // @ts-ignore
-        handleClose={() => setViewExpensesModalBudgetId()}
+        defaultBudgetId={addExpenseModalBudgetId}
+        handleExpenseClose={() => setShowAddExpenseModal(false)}
+      />
+      <ViewExpensesModal
+        // @ts-ignore
+        budgetId={viewExpensesModalBudgetId}
+        handleExpensesClose={() => setViewExpensesModalBudgetId(null)}
       />
     </>
   );

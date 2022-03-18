@@ -1,10 +1,21 @@
 import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
+  Budgets,
+  Expenses,
 } from "../contexts/BudgetsContext";
 import { currencyFormatter } from "../utils";
 
-export default function ViewExpensesModal({ budgetId, handleClose }) {
+interface Props {
+  budgetId: string;
+  handleExpensesClose: () => void;
+}
+
+export default function ViewExpensesModal({
+  budgetId,
+  handleExpensesClose,
+}: Props) {
+  // @ts-ignore
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
     useBudgets();
 
@@ -12,7 +23,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
-      : budgets.find((b) => b.id === budgetId);
+      : budgets.find((b: Budgets) => b.id === budgetId);
 
   return (
     <div>
@@ -30,7 +41,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                       className="bg-transparent hover:bg-red-500 text-red-700 hover:text-white py-2 px-2 border border-red-500 hover:border-transparent rounded"
                       onClick={() => {
                         deleteBudget(budget);
-                        handleClose();
+                        handleExpensesClose();
                       }}
                     >
                       Delete
@@ -38,7 +49,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                   )}
                 </div>
                 <div className="border text-2xl relative p-3">
-                  {expenses.map((expense) => (
+                  {expenses.map((expense: Expenses) => (
                     <div className="flex justify-between items-center py-3">
                       <div>
                         <p>{expense.description}</p>
@@ -61,7 +72,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                 </div>
                 <div
                   className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
-                  onClick={handleClose}
+                  onClick={handleExpensesClose}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

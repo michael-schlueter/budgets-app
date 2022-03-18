@@ -1,18 +1,24 @@
 import React, { useRef } from "react";
 import { useBudgets } from "../contexts/BudgetsContext";
 
-export default function AddBudgetModal({ show, handleClose }) {
-  const nameRef = useRef();
-  const maxSpendingRef = useRef();
+interface Props {
+  show?: boolean;
+  handleBudgetClose: () => void;
+}
+
+export default function AddBudgetModal({ show, handleBudgetClose }: Props) {
+  const nameRef = useRef<HTMLInputElement>(null!);
+  const maxSpendingRef = useRef<HTMLInputElement>(null!);
+  // @ts-ignore
   const { addBudget } = useBudgets();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addBudget({
       name: nameRef.current.value,
       max: parseFloat(maxSpendingRef.current.value), // converting string into a float
     });
-    handleClose();
+    handleBudgetClose();
   };
 
   return (
@@ -69,7 +75,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                 </div>
                 <div
                   className="cursor-pointer absolute top-0 right-0 m-3 dark:text-gray-100 text-gray-400 hover:text-gray-800 transition duration-150 ease-in-out"
-                  onClick={handleClose}
+                  onClick={handleBudgetClose}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

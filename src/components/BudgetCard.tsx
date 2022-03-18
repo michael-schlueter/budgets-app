@@ -1,3 +1,13 @@
+interface Props {
+  name: string;
+  max: number;
+  amount: number;
+  gray?: boolean;
+  hideButtons?: boolean;
+  onAddExpenseClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onViewExpensesClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export default function BudgetCard({
   name,
   max,
@@ -6,7 +16,7 @@ export default function BudgetCard({
   hideButtons,
   onAddExpenseClick,
   onViewExpensesClick,
-}) {
+}: Props) {
   const classNames = [
     "border",
     "border-gray-200",
@@ -15,7 +25,7 @@ export default function BudgetCard({
     "flex-col",
     "mb-4",
   ];
-  if (amount > max) {
+  if (amount > max && max !== 0) {
     classNames.push("bg-red-500 bg-opacity-20");
   } else if (gray) {
     classNames.push("bg-gray-100");
@@ -29,17 +39,19 @@ export default function BudgetCard({
         </div>
         <div className="text-xl">
           {amount} ${" "}
-          {max && <span className="text-sm text-gray-500">/ {max} $</span>}
+          {max !== 0 && (
+            <span className="text-sm text-gray-500">/ {max} $</span>
+          )}
         </div>
       </div>
-      {max && (
+      {max !== 0 && (
         <div className="bg-gray-400 h-3 rounded-lg mx-4 overflow-hidden mb-6">
           <div
             className={`${getProgressBarColor(
               amount,
               max
             )} h-full rounded-lg shadow-md`}
-            style={{ width: `${(amount / max).toFixed(2) * 100}%` }}
+            style={{ width: `${((amount / max) * 100).toFixed(2)}%` }}
           ></div>
         </div>
       )}
@@ -64,7 +76,7 @@ export default function BudgetCard({
 }
 
 // Set background-color depending on how much of the budget is used
-function getProgressBarColor(amount, max) {
+function getProgressBarColor(amount: number, max: number) {
   const ratio = amount / max;
   if (ratio < 0.5) return "bg-blue-500";
   if (ratio < 0.75) return "bg-yellow-400";
