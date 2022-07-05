@@ -7,7 +7,7 @@ import {
 import { currencyFormatter } from "../utils";
 
 interface Props {
-  budgetId: string;
+  budgetId: string | null | undefined;
   handleExpensesClose: () => void;
 }
 
@@ -18,7 +18,7 @@ export default function ViewExpensesModal({
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
     useBudgets();
 
-  const expenses = getBudgetExpenses(budgetId);
+  const expenses = typeof budgetId === 'string' ? getBudgetExpenses(budgetId) : []
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }

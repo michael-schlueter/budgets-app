@@ -8,7 +8,7 @@ import {
 interface Props {
   show: boolean;
   handleExpenseClose: () => void;
-  defaultBudgetId: string;
+  defaultBudgetId: React.MouseEvent | string | undefined
 }
 
 export default function AddBudgetModal({
@@ -20,6 +20,7 @@ export default function AddBudgetModal({
   const amountRef = useRef<HTMLInputElement>(null!);
   const budgetIdRef = useRef<HTMLSelectElement>(null!);
   const { addExpense, budgets } = useBudgets();
+  const defaultValue = typeof defaultBudgetId === 'string' ? defaultBudgetId : '';
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,7 +86,7 @@ export default function AddBudgetModal({
                       <select
                         className="text-base font-normal leading-3 text-gray-800 dark:text-gray-400 bg-gray-50 dark: dark:bg-gray-700 border rounded-lg border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 px-4 py-3 mt-2"
                         ref={budgetIdRef}
-                        defaultValue={defaultBudgetId}
+                        defaultValue={defaultValue}
                       >
                         <option id={UNCATEGORIZED_BUDGET_ID}>
                           Uncategorized
