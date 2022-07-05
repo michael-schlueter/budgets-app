@@ -1,8 +1,8 @@
 import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
-  Budgets,
-  Expenses,
+  BudgetType,
+  ExpenseType,
 } from "../contexts/BudgetsContext";
 import { currencyFormatter } from "../utils";
 
@@ -15,7 +15,6 @@ export default function ViewExpensesModal({
   budgetId,
   handleExpensesClose,
 }: Props) {
-  // @ts-ignore
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
     useBudgets();
 
@@ -23,7 +22,7 @@ export default function ViewExpensesModal({
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
-      : budgets.find((b: Budgets) => b.id === budgetId);
+      : budgets.find((b: BudgetType) => b.id === budgetId);
 
   return (
     <div>
@@ -49,7 +48,7 @@ export default function ViewExpensesModal({
                   )}
                 </div>
                 <div className="border text-2xl relative p-3">
-                  {expenses.map((expense: Expenses) => (
+                  {expenses.map((expense: ExpenseType) => (
                     <div className="flex justify-between items-center py-3">
                       <div>
                         <p>{expense.description}</p>

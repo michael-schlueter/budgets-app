@@ -1,7 +1,7 @@
 import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
-  Expenses,
+  ExpenseType,
 } from "../contexts/BudgetsContext";
 import BudgetCard from "./BudgetCard";
 
@@ -11,10 +11,9 @@ interface Props {
 }
 
 export const UncategorizedBudgetCard = (props: Props) => {
-  // @ts-ignore
   const { getBudgetExpenses } = useBudgets();
   const amount = getBudgetExpenses(UNCATEGORIZED_BUDGET_ID).reduce(
-    (total: number, expense: Expenses) => total + expense.amount,
+    (total: number, expense: ExpenseType) => total + expense.amount,
     0
   );
 

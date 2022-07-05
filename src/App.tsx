@@ -5,8 +5,8 @@ import AddExpenseModal from "./components/AddExpenseModal";
 import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
-  Budgets,
-  Expenses,
+  BudgetType,
+  ExpenseType,
 } from "./contexts/BudgetsContext";
 import { UncategorizedBudgetCard } from "./components/UncategorizedBudgetCard";
 import { TotalBudgetCard } from "./components/TotalBudgetCard";
@@ -22,7 +22,6 @@ function App() {
     React.MouseEvent | string | undefined
   >();
 
-  // @ts-ignore
   const { budgets, getBudgetExpenses } = useBudgets();
 
   const openAddExpenseModal = (budgetId: React.MouseEvent | string) => {
@@ -58,9 +57,9 @@ function App() {
             alignItems: "flex-start",
           }}
         >
-          {budgets.map((budget: Budgets) => {
+          {budgets.map((budget: BudgetType) => {
             const amount = getBudgetExpenses(budget.id).reduce(
-              (total: number, expense: Expenses) => total + expense.amount,
+              (total: number, expense: ExpenseType) => total + expense.amount,
               0
             );
             return (
@@ -91,12 +90,10 @@ function App() {
       />
       <AddExpenseModal
         show={showAddExpenseModal}
-        // @ts-ignore
         defaultBudgetId={addExpenseModalBudgetId}
         handleExpenseClose={() => setShowAddExpenseModal(false)}
       />
       <ViewExpensesModal
-        // @ts-ignore
         budgetId={viewExpensesModalBudgetId}
         handleExpensesClose={() => setViewExpensesModalBudgetId(null)}
       />

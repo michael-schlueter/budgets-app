@@ -2,7 +2,7 @@ import { useRef } from "react";
 import {
   useBudgets,
   UNCATEGORIZED_BUDGET_ID,
-  Budgets,
+  BudgetType,
 } from "../contexts/BudgetsContext";
 
 interface Props {
@@ -19,7 +19,6 @@ export default function AddBudgetModal({
   const descriptionRef = useRef<HTMLInputElement>(null!);
   const amountRef = useRef<HTMLInputElement>(null!);
   const budgetIdRef = useRef<HTMLSelectElement>(null!);
-  // @ts-ignore
   const { addExpense, budgets } = useBudgets();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -91,7 +90,7 @@ export default function AddBudgetModal({
                         <option id={UNCATEGORIZED_BUDGET_ID}>
                           Uncategorized
                         </option>
-                        {budgets.map((budget: Budgets) => (
+                        {budgets.map((budget: BudgetType) => (
                           <option key={budget.id} value={budget.id}>
                             {budget.name}
                           </option>

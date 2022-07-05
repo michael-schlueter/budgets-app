@@ -9,7 +9,6 @@ interface Props {
 export default function AddBudgetModal({ show, handleBudgetClose }: Props) {
   const nameRef = useRef<HTMLInputElement>(null!);
   const maxSpendingRef = useRef<HTMLInputElement>(null!);
-  // @ts-ignore
   const { addBudget } = useBudgets();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,15 +1,14 @@
-import { useBudgets, Expenses, Budgets } from "../contexts/BudgetsContext";
+import { useBudgets, ExpenseType, BudgetType } from "../contexts/BudgetsContext";
 import BudgetCard from "./BudgetCard";
 
 export const TotalBudgetCard = () => {
-  // @ts-ignore
   const { expenses, budgets } = useBudgets();
   const amount = expenses.reduce(
-    (total: number, expense: Expenses) => total + expense.amount,
+    (total: number, expense: ExpenseType) => total + expense.amount,
     0
   );
   const max = budgets.reduce(
-    (total: number, budget: Budgets) => total + budget.max,
+    (total: number, budget: BudgetType) => total + budget.max,
     0
   );
 
