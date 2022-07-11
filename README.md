@@ -61,8 +61,9 @@ in your terminal and visit localhost:3000 in your browser.
 - Creating custom hooks (useLocalStorage, useBudgets) for local storage / context API
 - Creating Modals with TailwindCSS
 - Typing of React Hooks / props / event-handler
-- Cloning a repositoring, creating branches, making pull requests, merging branches
+- Cloning a repository, creating branches, making pull requests, merging branches
 - Identifying and fixing various bugs in relation to TS
+- Thinking in TS (planning types beforehand, having a good understanding of what you want to achieve with your code before writing it)
 
 
 
