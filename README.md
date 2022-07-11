@@ -67,8 +67,7 @@ in your terminal and visit localhost:3000 in your browser.
 
 
 ## Project Status
-The project is basically finished. I plan to revisit it in the future to tweak / fix the typing after I gained more experience in it with other projects.
-
+The project is finished. 
 
 
 ## Acknowledgements
