@@ -22,11 +22,11 @@ export default function ViewExpensesModal({
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
-      : budgets.find((b: BudgetType) => b.id === budgetId);
+      : budgets.find((b: BudgetType) => b.id === budgetId)
 
   return (
     <div>
-      {budgetId != null ? (
+      {budgetId != null && typeof budget !== 'undefined' ? (
         <>
           <div className="border justify-center items-start flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-full my-6 mx-auto max-w-md">
